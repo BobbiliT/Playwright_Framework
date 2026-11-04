@@ -10,7 +10,7 @@ public class FrameworkConfig {
     }
 
     public String getBrowserName() {
-        String browser = System.getProperty("browser", "webkit").toLowerCase(Locale.ROOT);
+        String browser = System.getProperty("browser", "chromium").toLowerCase(Locale.ROOT);
         if (!browser.equals("chromium") && !browser.equals("firefox") && !browser.equals("webkit")) {
             throw new IllegalArgumentException("Unsupported browser: " + browser
                     + ". Supported values are chromium, firefox, and webkit.");
@@ -19,7 +19,7 @@ public class FrameworkConfig {
     }
 
     public boolean isHeadless() {
-        String headless = System.getProperty("headless", "false");
+        String headless = System.getProperty("headless", "true");
         if (!headless.equalsIgnoreCase("true") && !headless.equalsIgnoreCase("false")) {
             throw new IllegalArgumentException("The headless property must be true or false.");
         }

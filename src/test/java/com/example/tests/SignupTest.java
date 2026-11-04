@@ -1,16 +1,17 @@
 package com.example.tests;
 
+import org.testng.annotations.Test;
+
 import com.example.base.BaseTest;
 import com.example.pages.EngineerDiariesHomePage;
 import com.example.pages.SignupPage;
-import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class SignupTest extends BaseTest {
-    @Test
+    @Test(groups = "sanity")
     public void validTestDataCanBeEnteredWithoutCreatingAnAccount() {
         new EngineerDiariesHomePage(page, config.getBaseUrl()).open().openSignup();
         SignupPage signupPage = new SignupPage(page);
@@ -37,7 +38,7 @@ public class SignupTest extends BaseTest {
         assertTrue(signupPage.isEmailFormatValid(), "A well-formed email should pass browser validation.");
     }
 
-    @Test
+    @Test(groups = "sanity")
     public void malformedEmailFailsBrowserValidation() {
         new EngineerDiariesHomePage(page, config.getBaseUrl()).open().openSignup();
         SignupPage signupPage = new SignupPage(page);

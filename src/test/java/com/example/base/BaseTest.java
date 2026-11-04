@@ -17,7 +17,7 @@ public abstract class BaseTest {
     protected BrowserContext context;
     protected Page page;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUpBrowser() {
         playwright = Playwright.create();
         BrowserType.LaunchOptions options = new BrowserType.LaunchOptions()

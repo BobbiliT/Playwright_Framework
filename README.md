@@ -1,45 +1,44 @@
 # Playwright Java TestNG Framework
 
-Java 17 browser automation framework using Maven, Playwright, TestNG, and the Page Object Model.
+A small browser automation framework using Java 17, Maven, Playwright, TestNG, and the Page Object Model.
 
-## Project layout
+## Project structure
 
-- `src/main/java/com/example/config/` - browser and run configuration
-- `src/main/java/com/example/pages/` - page objects and UI actions
-- `src/test/java/com/example/base/` - shared Playwright test lifecycle
-- `src/test/java/com/example/tests/` - TestNG smoke, sanity, and regression tests
-
-## Setup
-
-Install the Playwright WebKit browser (the current default):
-
-```powershell
-mvn exec:java "-Dexec.mainClass=com.microsoft.playwright.CLI" "-Dexec.args=install webkit"
+```text
+src/
+  main/java/com/example/
+    config/     Browser and URL settings
+    pages/      Page objects and browser actions
+  test/java/com/example/
+    base/       Shared browser setup and cleanup
+    tests/      TestNG test cases
 ```
 
-## Run tests
+## Setup and run
+
+Install Java 17+, Maven, and the Playwright browser:
+
+```powershell
+mvn exec:java "-Dexec.mainClass=com.microsoft.playwright.CLI" "-Dexec.args=install chromium"
+```
+
+Run all tests headlessly in Chromium:
 
 ```powershell
 mvn test
 ```
 
-By default, tests run in a visible WebKit browser against `https://www.engineerdiaries.com/`. To run headlessly with Chromium:
+The default site is `https://www.engineerdiaries.com/`. Override settings as needed:
 
 ```powershell
-mvn test "-Dbrowser=chromium" "-Dheadless=true"
+mvn test "-Dbrowser=firefox" "-Dheadless=false" "-DbaseUrl=https://example.com/"
 ```
 
-Override settings with Maven system properties (the matching Playwright browser must be installed):
+Supported browsers: `chromium`, `firefox`, and `webkit`. Install the selected browser before running tests.
 
-```powershell
-mvn test "-Dbrowser=chromium" "-Dheadless=true" "-DbaseUrl=https://example.com"
-```
+## Test groups
 
-Supported browsers are `chromium`, `firefox`, and `webkit`; install the matching Playwright browser before selecting it.
-
-The signup tests use synthetic data to check valid field entry and malformed-email browser validation. They do not click **Create Account**, so they do not create an account on the live site. Maven Surefire writes test results to `target/surefire-reports/`.
-
-The UI Framework catalog tests cover page loading, product search and empty results, price filtering and sorting, and the in-stock filter. The Selenium practice-page tests cover smoke checks for page/table loading, sanity checks for country and language controls, and regression checks for tabs, iframe input, and disabled controls. Run all tests with `mvn test`, or select a test group:
+Tests are grouped by purpose: `smoke` checks critical pages load, `sanity` checks key controls, and `regression` checks existing interactions.
 
 ```powershell
 mvn test "-Dgroups=smoke"
@@ -47,24 +46,8 @@ mvn test "-Dgroups=sanity"
 mvn test "-Dgroups=regression"
 ```
 
-## Git and CI
+The signup tests use synthetic data and do not submit the form or create an account. TestNG reports are written to `target/surefire-reports/`.
 
-This project includes a GitHub Actions workflow at `.github/workflows/ci.yml`. It runs the Maven TestNG suite on pushes, pull requests, or when manually started from the Actions tab. CI uses Java 17 and headless Chromium and uploads Surefire reports, even when tests fail.
+## CI
 
-Initialize Git and create the first commit from the project directory:
-
-```powershell
-git init
-git add .
-git commit -m "Initial Playwright Java TestNG framework"
-```
-
-To publish to GitHub, create an empty GitHub repository, then connect it and push:
-
-```powershell
-git remote add origin https://github.com/<YOUR-USER>/<YOUR-REPOSITORY>.git
-git branch -M main
-git push -u origin main
-```
-
-After pushing, GitHub Actions runs the CI workflow automatically. Pull requests also run the suite.
+GitHub Actions runs the complete suite on pushes and pull requests using Java 17 and Chromium. Download the `surefire-test-reports` artifact from the workflow run to view the report.

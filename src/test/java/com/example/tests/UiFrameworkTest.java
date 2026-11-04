@@ -1,15 +1,15 @@
 package com.example.tests;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
 
 import org.testng.annotations.Test;
 
 import com.example.base.BaseTest;
 import com.example.pages.UiFrameworkPage;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 public class UiFrameworkTest extends BaseTest {
     @Test(groups = "smoke")
