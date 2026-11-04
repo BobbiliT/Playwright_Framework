@@ -30,7 +30,7 @@ public class UiFrameworkTest extends BaseTest {
         assertTrue(catalog.isHeadingVisible("Daisy"), "Search should keep the matching product visible.");
         assertFalse(catalog.isHeadingVisible("Rose"), "Search should hide products that do not match.");
 
-        catalog.searchFor("no-such-flower");
+        catalog.searchFor("Tulip");
         catalog.waitForNoItemsMessage();
         assertTrue(catalog.isNoItemsMessageVisible());
     }
