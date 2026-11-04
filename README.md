@@ -10,7 +10,7 @@ src/
     config/     Browser and URL settings
     pages/      Page objects and browser actions
   test/java/com/example/
-    base/       Shared browser setup and cleanup
+    base/       Shared browser and API setup and cleanup
     tests/      TestNG test cases
 ```
 
@@ -46,7 +46,7 @@ mvn test "-Dgroups=sanity"
 mvn test "-Dgroups=regression"
 ```
 
-The signup tests use synthetic data and do not submit the form or create an account. TestNG reports are written to `target/surefire-reports/`.
+The signup tests use synthetic data and do not submit the form or create an account. API tests log in with the site's documented demo credentials, then use read-only product endpoints: the product list, product details, and an unknown product ID. They do not create, update, or delete data. TestNG reports are written to `target/surefire-reports/`.
 
 ## CI
 

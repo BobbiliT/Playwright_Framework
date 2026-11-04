@@ -16,19 +16,19 @@ public class SignupTest extends BaseTest {
         new EngineerDiariesHomePage(page, config.getBaseUrl()).open().openSignup();
         SignupPage signupPage = new SignupPage(page);
         signupPage.fillCollegeStudentDetails(
-                "Playwright Test User",
-                "0000000000",
-                "signup-test@example.invalid",
-                "ValidTestPass123!",
+                "Bobbili Tejeswara Rao",
+                "7036060404",
+                "tejesh123@gmail.com",
+                "Tejesh@123",
                 "India",
                 "Delhi",
                 "Bachelor of Technology",
                 "Example Test College",
                 "1st");
 
-        assertEquals(signupPage.getFieldValue("fullName"), "Playwright Test User");
-        assertEquals(signupPage.getFieldValue("phoneNumber"), "0000000000");
-        assertEquals(signupPage.getFieldValue("email"), "signup-test@example.invalid");
+        assertEquals(signupPage.getFieldValue("fullName"), "Bobbili Tejeswara Rao");
+        assertEquals(signupPage.getFieldValue("phoneNumber"), "7036060404");
+        assertEquals(signupPage.getFieldValue("email"), "tejesh123@gmail.com");
         assertEquals(signupPage.getFieldValue("educationQualification"), "Bachelor of Technology");
         assertEquals(signupPage.getFieldValue("collegeName"), "Example Test College");
         assertEquals(signupPage.getSelectedValue("country"), "India");
