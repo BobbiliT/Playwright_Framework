@@ -19,7 +19,7 @@ public class FrameworkConfig {
     }
 
     public boolean isHeadless() {
-        String headless = System.getProperty("headless", "true");
+        String headless = System.getProperty("headless", "false");
         if (!headless.equalsIgnoreCase("true") && !headless.equalsIgnoreCase("false")) {
             throw new IllegalArgumentException("The headless property must be true or false.");
         }
